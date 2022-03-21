@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все пользователи</title>
+</head>
+<body>
+<h2>Список пользователей</h2>
+<br>
+<!--<div th:each="car : ${cars}">-->
+<!--    <a th:href="@{/cars/{brand}(brand=${car.getBrand()})}" th:text="${car.getModel()}">auto</a>-->
+<div>
+    <table border="1">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Электронная почта</th>
+            <th>Действия</th>
+        </tr>
+        <!--			<c:forEach var="user" items="${userList}">
+				<tr>
+					<td>${user.firstName}</td>
+					<td>${user.lastName}</td>
+					<td>${user.userName}</td>
+					<td><a
+						href="${pageContext.request.contextPath}/editUser/${user.id}">Edit</a></td>
+					<td><a
+						href="${pageContext.request.contextPath}/deleteUser/${user.id}">Delete</a></td>
+				</tr>
+			</c:forEach>-->
+        <!--    <a th:href="@{/cars/{brand}(brand=${car.getBrand()})}" th:text="${car.getModel()}">auto</a>-->
+        <tr th:each="user : ${allUsers}">
+
+            <!--         <tr href ="updateButton" th:href="@{/updateInfo(userId=${user.id})}"></tr>-->
+
+            <td th:utext="${user.getFirstName()}">VALUE</td>
+            <td th:utext="${user.getLastName()}">VALUE</td>
+            <td th:utext="${user.getAge()}">VALUE</td>
+            <td th:utext="${user.getEmail()}">VALUE</td>
+            <td>
+                <form th:action="@{/updateInfo}">
+                    <button type="submit" th:name="userId" th:value=${user.id}>Изменить</button>
+                </form>
+                <form th:action="@{/deleteUser}">
+                    <button type="submit" th:name="userId" th:value=${user.id}>Удалить</button>
+                </form>
+                <!--                <button type="button" th:name="@{/updateInfo}" th:value=${user.id}>Изменить</button>-->
+                <!--                <input type="button" value="Изменить"-->
+                <!--                onclick="window.location.href = "">-->
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <input type="submit" value="Добавить"
+           onclick="window.location.href = 'addNewUser'"/>
+</div>
+</body>
+</html>
