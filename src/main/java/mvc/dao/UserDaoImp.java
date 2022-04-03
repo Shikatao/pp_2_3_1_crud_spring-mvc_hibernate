@@ -22,20 +22,22 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        entityManager.merge(user);
+        entityManager.persist(user);
     }
 
 
     @Override
     public User getUser(Long id) {
-        TypedQuery<User> typedQuery = entityManager.createQuery(
-                "select u from User u where u.id = :id", User.class);
-        typedQuery.setParameter("id", id);
-        return typedQuery.getSingleResult();
+        return entityManager.find(User.class, id);
     }
 
     @Override
     public void deleteUser(Long id) {
         entityManager.remove(getUser(id));
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 }

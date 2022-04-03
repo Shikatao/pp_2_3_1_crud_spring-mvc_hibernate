@@ -38,11 +38,19 @@ public class UsersController {
         return "redirect:/";
     }
 
+    @RequestMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User user) {
+
+        userService.updateUser(user);
+
+        return "redirect:/";
+    }
+
     @RequestMapping("/updateInfo")
-    public String updateUser(@RequestParam("userId") Long id, Model model) {
+    public String updateInfo(@RequestParam("userId") Long id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
-        return "user-info";
+        return "updateInfoUs";
     }
 
     @RequestMapping("/deleteUser")
